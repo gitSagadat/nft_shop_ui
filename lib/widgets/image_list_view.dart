@@ -2,29 +2,31 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:nft_shop_ui/screens/nft_screen.dart';
 
 class ImageListView extends StatefulWidget {
-  const ImageListView({Key? key, required this.startIndex}) : super(key: key);
+  const ImageListView({Key? key, required this.startIndex, this.duration = 30})
+      : super(key: key);
 
   final int startIndex;
+  final int duration;
 
   @override
   _ImageListViewState createState() => _ImageListViewState();
 }
 
 class _ImageListViewState extends State<ImageListView> {
-
   late ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
-    
+
     _scrollController = ScrollController();
 
     _scrollController.addListener(() {
       //Detect if it at the end of list view
-      if(_scrollController.position.atEdge){
+      if (_scrollController.position.atEdge) {
         _autoScroll();
       }
     });
@@ -34,17 +36,19 @@ class _ImageListViewState extends State<ImageListView> {
     });
   }
 
-  _autoScroll(){
+  _autoScroll() {
     final currentScrollPosition = _scrollController.offset;
     final scrollEndPosition = _scrollController.position.maxScrollExtent;
-    
+
     scheduleMicrotask(() {
-   _scrollController.animateTo(currentScrollPosition == scrollEndPosition ? 0: scrollEndPosition,
-       duration: const Duration(seconds: 30),
-       curve: Curves.linear);
+      _scrollController.animateTo(
+          currentScrollPosition == scrollEndPosition ? 0 : scrollEndPosition,
+          duration: Duration(seconds: widget.duration),
+          curve: Curves.linear,
+      );
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Transform.rotate(
@@ -56,7 +60,7 @@ class _ImageListViewState extends State<ImageListView> {
           itemCount: 10,
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext, int index) {
-            return _ImageTile (
+            return _ImageTile(
                 image: 'assets/nfts/${widget.startIndex + index}.png');
           },
         ),
@@ -72,11 +76,17 @@ class _ImageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: image,
-      child: Image.asset(
-        image,
-        width: 130,
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (_)=>NFTScreen(image: image)),
+        );
+      },
+      child: Hero(
+        tag: image,
+        child: Image.asset(
+          image,
+          width: 130,
+        ),
       ),
     );
   }
