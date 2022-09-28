@@ -1,16 +1,1 @@
-# nft_shop_ui
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![record_1080x2400_20220928_123421_1 (1)](https://user-images.githubusercontent.com/112682714/192711078-ecaa4a78-5c37-4eaa-a12e-57038721c7b7.gif)
